@@ -99,5 +99,17 @@ namespace RestSharpTest
             Assert.AreEqual("Shiv", dataResponse.name);
             Assert.AreEqual(15000, dataResponse.Salary);
         }
+
+        [TestMethod]
+        public void GivenEmployee_OnDelete_ShouldReturnSuccessStatus()
+        {
+            RestRequest request = new RestRequest("/employees/3", Method.DELETE);
+            JObject jObjectbody = new JObject();
+            jObjectbody.Add("name", "Shiv");
+            jObjectbody.Add("Salary", "15000");
+            request.AddParameter("application/json", jObjectbody, ParameterType.RequestBody);
+            IRestResponse response = client.Execute(request);
+            Assert.AreEqual(response.StatusCode, System.Net.HttpStatusCode.OK);
+        }
     }
 }
