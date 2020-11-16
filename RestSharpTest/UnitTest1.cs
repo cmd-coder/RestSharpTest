@@ -28,8 +28,6 @@ namespace RestSharpTest
         private IRestResponse getEmployeeList()
         {
             RestRequest request = new RestRequest("/employees", Method.GET);
-
-            //act
             IRestResponse response = client.Execute(request);
             return response;
         }
@@ -38,8 +36,6 @@ namespace RestSharpTest
         public void onCallingGETApi_ReturnEmployeeList()
         {
             IRestResponse response = getEmployeeList();
-
-            //assert
             Assert.AreEqual(response.StatusCode, System.Net.HttpStatusCode.OK);
             List<Employee> dataResponse = JsonConvert.DeserializeObject<List<Employee>>(response.Content);
             Assert.AreEqual(15, dataResponse.Count);
